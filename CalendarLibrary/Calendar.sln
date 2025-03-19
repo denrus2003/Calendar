@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarLibrary", "Calendar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarConsole", "..\CalendarConsole\CalendarConsole.csproj", "{34D98F1C-BE57-4900-82D2-37A711EAFCF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarWinForms", "..\CalendarWinForms\CalendarWinForms.csproj", "{10C3E1D7-D5E7-4D01-B6F0-E0E06C3355E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{34D98F1C-BE57-4900-82D2-37A711EAFCF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34D98F1C-BE57-4900-82D2-37A711EAFCF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34D98F1C-BE57-4900-82D2-37A711EAFCF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10C3E1D7-D5E7-4D01-B6F0-E0E06C3355E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10C3E1D7-D5E7-4D01-B6F0-E0E06C3355E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10C3E1D7-D5E7-4D01-B6F0-E0E06C3355E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10C3E1D7-D5E7-4D01-B6F0-E0E06C3355E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
