@@ -1,11 +1,16 @@
-﻿namespace CalendarWinForms
+﻿// MainForm.Designer.cs
+// Дизайнерский файл для MainForm. Здесь создаются и размещаются элементы управления.
+namespace CalendarWinForms
 {
     partial class MainForm
     {
+        // Обязательная переменная конструктора.
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.ListBox listBoxEvents;
         private System.Windows.Forms.Button btnAddEvent;
+        private System.Windows.Forms.Button btnRemoveEvent;
 
+        // Очистка ресурсов.
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -13,21 +18,21 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
+        // Метод, автоматически созданный конструктором форм.
         private void InitializeComponent()
         {
             this.listBoxEvents = new System.Windows.Forms.ListBox();
             this.btnAddEvent = new System.Windows.Forms.Button();
+            this.btnRemoveEvent = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxEvents
             // 
             this.listBoxEvents.FormattingEnabled = true;
-            this.listBoxEvents.ItemHeight = 16;
+            this.listBoxEvents.ItemHeight = 31;
             this.listBoxEvents.Location = new System.Drawing.Point(12, 12);
             this.listBoxEvents.Name = "listBoxEvents";
-            this.listBoxEvents.Size = new System.Drawing.Size(360, 180);
+            this.listBoxEvents.Size = new System.Drawing.Size(360, 159);
             this.listBoxEvents.TabIndex = 0;
             // 
             // btnAddEvent
@@ -40,16 +45,27 @@
             this.btnAddEvent.UseVisualStyleBackColor = true;
             this.btnAddEvent.Click += new System.EventHandler(this.btnAddEvent_Click);
             // 
+            // btnRemoveEvent
+            // 
+            this.btnRemoveEvent.Location = new System.Drawing.Point(222, 210);
+            this.btnRemoveEvent.Name = "btnRemoveEvent";
+            this.btnRemoveEvent.Size = new System.Drawing.Size(150, 30);
+            this.btnRemoveEvent.TabIndex = 2;
+            this.btnRemoveEvent.Text = "Удалить событие";
+            this.btnRemoveEvent.UseVisualStyleBackColor = true;
+            this.btnRemoveEvent.Click += new System.EventHandler(this.btnRemoveEvent_Click);
+            // 
             // MainForm
             // 
             this.ClientSize = new System.Drawing.Size(384, 261);
+            this.Controls.Add(this.btnRemoveEvent);
             this.Controls.Add(this.btnAddEvent);
             this.Controls.Add(this.listBoxEvents);
             this.Name = "MainForm";
             this.Text = "Календарь WinForms";
+            this.Load += new System.EventHandler(this.MainForm_Load_1);
             this.ResumeLayout(false);
-        }
 
-        #endregion
+        }
     }
 }

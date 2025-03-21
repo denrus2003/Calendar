@@ -1,0 +1,11 @@
+﻿<Window x:Class="CalendarWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Календарь WPF" Height="350" Width="525">
+    <Grid>
+        <StackPanel Margin="10">
+            <ListBox Name="lbEvents" Height="200" Margin="0,0,0,10"/>
+            <Button Name="btnAddEvent" Content="Добавить событие" Width="150" Click="btnAddEvent_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

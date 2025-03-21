@@ -17,20 +17,53 @@ namespace CalendarWinForms
 
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
-            // В этом примере для простоты события добавляются с текущей датой и фиксированными данными.
-            DateTime date = DateTime.Now;
-            string title = "Новое событие";
-            string description = "Описание события";
-
-            calendar.AddEvent(new CalendarEvent(date, title, description));
-            RefreshEvents();
+            // Открытие диалогового окна для ввода данных события
+            using (var editor = new EventEditorForm())
+            {
+                if (editor.ShowDialog() == DialogResult.OK)
+                {
+                    // Добавление события и обновление списка
+                    calendar.AddEvent(editor.CalendarEvent);
+                    RefreshEvents();
+                }
+            }
         }
+
+        // Обработчик нажатия кнопки "Удалить событие"
+        private void btnRemoveEvent_Click(object sender, EventArgs e)
+        {
+            if (listBoxEvents.SelectedItem is CalendarEvent selectedEvent)
+            {
+                calendar.RemoveEvent(selectedEvent);
+                RefreshEvents();
+            }
+            else
+            {
+                MessageBox.Show("Выберите событие для удаления.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
         private void RefreshEvents()
         {
             // Обновляем источник данных для ListBox.
             listBoxEvents.DataSource = null;
             listBoxEvents.DataSource = new BindingSource { DataSource = calendar.GetEvents() };
+        }
+
+        private void listBoxEvents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
