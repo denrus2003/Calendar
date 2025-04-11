@@ -1,0 +1,62 @@
+﻿<Window x:Class="CalendarWPF.EventEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Редактор события" Height="450" Width="500">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <!-- Строка для даты и времени -->
+            <RowDefinition Height="Auto"/>
+            <!-- Заголовок -->
+            <RowDefinition Height="Auto"/>
+            <!-- Описание -->
+            <RowDefinition Height="Auto"/>
+            <!-- Геопозиция -->
+            <RowDefinition Height="Auto"/>
+            <!-- Вложения -->
+            <RowDefinition Height="Auto"/>
+            <!-- Spacer -->
+            <RowDefinition Height="*"/>
+            <!-- Кнопки "Сохранить" и "Отмена" -->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <!-- Дополнительный столбец для кнопок у геопозиции и вложений -->
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Дата и время -->
+        <Label Content="Дата:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <DatePicker x:Name="dpDate" Grid.Row="0" Grid.Column="1" Margin="5"/>
+        <Label Content="Время (HH:mm):" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="tbTime" Grid.Row="0" Grid.Column="3" Margin="5" Width="60" Text="12:00"/>
+
+        <!-- Заголовок -->
+        <Label Content="Заголовок:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="tbTitle" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5"/>
+
+        <!-- Описание -->
+        <Label Content="Описание:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
+        <TextBox x:Name="tbDescription" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="5" AcceptsReturn="True" Height="100"/>
+
+        <!-- Геопозиция -->
+        <Label Content="Геопозиция:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox x:Name="tbGeolocation" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <Button Content="Определить" Grid.Row="3" Grid.Column="2" Margin="5" Click="btnGetCurrentLocation_Click"/>
+
+        <!-- Вложения -->
+        <Label Content="Вложения:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" Margin="5"/>
+        <ListBox x:Name="lbAttachments" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Height="80"/>
+        <StackPanel Grid.Row="4" Grid.Column="3" Orientation="Vertical" Margin="5">
+            <Button Content="Добавить файл" Margin="2" Click="btnAddAttachment_Click"/>
+            <Button Content="Удалить файл" Margin="2" Click="btnRemoveAttachment_Click"/>
+        </StackPanel>
+
+        <!-- Кнопки "Сохранить" и "Отмена" -->
+        <StackPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Сохранить" Width="80" Margin="5" Click="btnSave_Click"/>
+            <Button Content="Отмена" Width="80" Margin="5" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

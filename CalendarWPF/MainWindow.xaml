@@ -1,11 +1,21 @@
 ﻿<Window x:Class="CalendarWPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Календарь WPF" Height="350" Width="525">
-    <Grid>
-        <StackPanel Margin="10">
-            <ListBox Name="lbEvents" Height="200" Margin="0,0,0,10"/>
-            <Button Name="btnAddEvent" Content="Добавить событие" Width="150" Click="btnAddEvent_Click"/>
+        Title="Календарь WPF" Height="400" Width="600">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!-- Список событий -->
+        <ListBox x:Name="lbEvents" Grid.Row="0" 
+                 MouseDoubleClick="lbEvents_MouseDoubleClick"
+                 Margin="0,0,0,10"/>
+        <!-- Панель управления: кнопки и выбор формата -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="btnAddEvent" Content="Добавить событие" Margin="5" Click="btnAddEvent_Click"/>
+            <Button x:Name="btnRemoveEvent" Content="Удалить событие" Margin="5" Click="btnRemoveEvent_Click"/>
+            <ComboBox x:Name="cbDisplayFormat" Margin="5" Width="150" SelectionChanged="cbDisplayFormat_SelectionChanged"/>
         </StackPanel>
     </Grid>
 </Window>

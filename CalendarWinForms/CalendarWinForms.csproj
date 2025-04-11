@@ -48,6 +48,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EncryptionSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EncryptionSettingsForm.Designer.cs">
+      <DependentUpon>EncryptionSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventEditorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EncryptionSettingsForm.resx">
+      <DependentUpon>EncryptionSettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
