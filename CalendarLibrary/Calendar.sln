@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarWinForms", "..\Cale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalendarWPF", "..\CalendarWPF\CalendarWPF.csproj", "{A9A9B6D1-BF3F-4374-ACCA-CA537464C9C2}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "soim", "\\Mac\Home\Downloads\SOIM_8_4_8c\SOIM_8_4_8c\soim\soim.vcxproj", "{C4C10C5A-BD02-3665-90D8-148130C998BB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,14 +51,6 @@ Global
 		{A9A9B6D1-BF3F-4374-ACCA-CA537464C9C2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9A9B6D1-BF3F-4374-ACCA-CA537464C9C2}.Release|ARM64.ActiveCfg = Release|Any CPU
 		{A9A9B6D1-BF3F-4374-ACCA-CA537464C9C2}.Release|ARM64.Build.0 = Release|Any CPU
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Debug|Any CPU.ActiveCfg = Debug|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Debug|Any CPU.Build.0 = Debug|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Debug|ARM64.Build.0 = Debug|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Release|Any CPU.ActiveCfg = Release|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Release|Any CPU.Build.0 = Release|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Release|ARM64.ActiveCfg = Release|ARM64
-		{C4C10C5A-BD02-3665-90D8-148130C998BB}.Release|ARM64.Build.0 = Release|ARM64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
