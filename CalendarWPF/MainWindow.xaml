@@ -8,11 +8,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <!-- Список событий -->
+        
         <ListBox x:Name="lbEvents" Grid.Row="0" 
                  MouseDoubleClick="lbEvents_MouseDoubleClick"
                  Margin="0,0,0,10"/>
-        <!-- Панель управления: кнопки и выбор формата -->
+        
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnAddEvent" Content="Добавить событие" Margin="5" Click="btnAddEvent_Click"/>
             <Button x:Name="btnRemoveEvent" Content="Удалить событие" Margin="5" Click="btnRemoveEvent_Click"/>

@@ -14,7 +14,7 @@ namespace CalendarWinForms
         public EventEditorForm()
         {
             InitializeComponent();
-            // Если создаётся новое событие, устанавливаем начальные значения
+            
             CalendarEvent = new CalendarEvent(DateTime.Now, "", "", "");
         }
 
@@ -58,7 +58,7 @@ namespace CalendarWinForms
         
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // Проверка: заголовок не может быть пустым
+            
             if (string.IsNullOrWhiteSpace(txtTitle.Text))
             {
                 MessageBox.Show("Заголовок не может быть пустым.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -87,9 +87,9 @@ namespace CalendarWinForms
         {
             try
             {
-                // Создаем наблюдатель за геопозицией
+                
                 GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
-                // Пытаемся запустить наблюдение (таймаут 5 секунд)
+                
                 bool started = watcher.TryStart(false, TimeSpan.FromSeconds(5));
                 if (started)
                 {
@@ -100,7 +100,7 @@ namespace CalendarWinForms
                     }
                     else
                     {
-                        // Устанавливаем в поле геопозиции координаты в формате "Lat: <широта>, Lon: <долгота>"
+                        
                         txtGeolocation.Text = $"Lat: {coord.Latitude:F6}, Lon: {coord.Longitude:F6}";
                     }
                 }
