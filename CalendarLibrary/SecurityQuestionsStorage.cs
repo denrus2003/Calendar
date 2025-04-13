@@ -9,8 +9,7 @@ namespace CalendarLibrary
     public class SecurityQuestion
     {
         public string Question { get; set; }
-        // Для демонстрации ответ хранится в виде строки.
-        // В реальном проекте рекомендуется хранить хэш ответа.
+        
         public string Answer { get; set; }
     }
 
