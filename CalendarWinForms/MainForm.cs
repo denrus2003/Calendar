@@ -154,5 +154,10 @@ namespace CalendarWinForms
         private void lbEvents_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
+
+        private void lbEvents_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

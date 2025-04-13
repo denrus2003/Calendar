@@ -36,22 +36,26 @@ namespace CalendarLibrary
             }
         }
 
-        
+
         private void CreateTimerForEvent(CalendarEvent ev)
         {
             double ms = (ev.Date - DateTime.Now).TotalMilliseconds;
             if (ms < 0)
                 ms = 0; 
 
+            
+            int dueTime = ms > int.MaxValue ? int.MaxValue : (int)ms;
+
             Timer timer = new Timer((state) =>
             {
                 ev.Notified = true;
                 OnEventTimeReached(ev);
                 RemoveTimer(ev);
-            }, null, (int)ms, Timeout.Infinite);
+            }, null, dueTime, Timeout.Infinite);
 
             _eventTimers[ev] = timer;
         }
+
 
         private void OnEventTimeReached(CalendarEvent ev)
         {

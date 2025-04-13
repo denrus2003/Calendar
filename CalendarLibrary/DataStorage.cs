@@ -10,6 +10,7 @@ namespace CalendarLibrary
     public static class DataStorage
     {
         private static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "events.dat");
+        private static string logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "error.log");
 
         public static void SaveEvents(IEnumerable<CalendarEvent> events, bool encryptionEnabled, string password)
         {
@@ -18,7 +19,15 @@ namespace CalendarLibrary
 
             if (encryptionEnabled)
             {
-                json = EncryptString(json, password);
+                try
+                {
+                    json = EncryptString(json, password);
+                }
+                catch (Exception ex)
+                {
+                    LogError("Ошибка шифрования: " + ex.Message);
+                    
+                }
             }
 
             File.WriteAllText(filePath, json, Encoding.UTF8);
@@ -32,13 +41,23 @@ namespace CalendarLibrary
             string content = File.ReadAllText(filePath, Encoding.UTF8);
             if (encryptionEnabled)
             {
+                if (!IsBase64String(content))
+                {
+                    LogError("Данные файла не являются корректной строкой Base-64. Файл, возможно, не зашифрован или поврежден.");
+                    ResetFile();
+                    return new List<CalendarEvent>();
+                }
+
                 try
                 {
                     content = DecryptString(content, password);
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception("Ошибка дешифрования файла событий. Проверьте пароль шифрования.", ex);
+                    LogError("Ошибка дешифрования файла событий: " + ex.Message);
+                    
+                    ResetFile();
+                    return new List<CalendarEvent>();
                 }
             }
 
@@ -46,8 +65,9 @@ namespace CalendarLibrary
             {
                 return JsonSerializer.Deserialize<List<CalendarEvent>>(content);
             }
-            catch
+            catch (Exception ex)
             {
+                LogError("Ошибка десериализации JSON: " + ex.Message);
                 return new List<CalendarEvent>();
             }
         }
@@ -59,9 +79,9 @@ namespace CalendarLibrary
             byte[] salt = GenerateRandomBytes(16);
             byte[] iv = GenerateRandomBytes(16);
 
-            // Используем классический блок using
             string encrypted;
-            using (var keyDerivationFunction = new Rfc2898DeriveBytes(password, salt, 10000))
+
+            using (var keyDerivationFunction = new Rfc2898DeriveBytes(password, salt, 10000, HashAlgorithmName.SHA256))
             {
                 byte[] key = keyDerivationFunction.GetBytes(32); // 256 бит
 
@@ -72,7 +92,7 @@ namespace CalendarLibrary
                     aes.Mode = CipherMode.CBC;
                     using (MemoryStream ms = new MemoryStream())
                     {
-                        // Сначала записываем соль и IV
+                        
                         ms.Write(salt, 0, salt.Length);
                         ms.Write(iv, 0, iv.Length);
                         using (CryptoStream cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
@@ -91,7 +111,16 @@ namespace CalendarLibrary
 
         private static string DecryptString(string cipherText, string password)
         {
-            byte[] fullCipher = Convert.FromBase64String(cipherText);
+            byte[] fullCipher;
+            try
+            {
+                fullCipher = Convert.FromBase64String(cipherText);
+            }
+            catch (FormatException ex)
+            {
+                throw new Exception("Ошибка: данные файла не являются корректной строкой Base-64. Возможно, файл не зашифрован или поврежден.", ex);
+            }
+
             byte[] salt = new byte[16];
             byte[] iv = new byte[16];
             Array.Copy(fullCipher, 0, salt, 0, salt.Length);
@@ -100,7 +129,7 @@ namespace CalendarLibrary
             Array.Copy(fullCipher, salt.Length + iv.Length, cipher, 0, cipher.Length);
 
             string decrypted;
-            using (var keyDerivationFunction = new Rfc2898DeriveBytes(password, salt, 10000))
+            using (var keyDerivationFunction = new Rfc2898DeriveBytes(password, salt, 10000, HashAlgorithmName.SHA256))
             {
                 byte[] key = keyDerivationFunction.GetBytes(32);
                 using (Aes aes = Aes.Create())
@@ -131,6 +160,54 @@ namespace CalendarLibrary
                 rng.GetBytes(bytes);
             }
             return bytes;
+        }
+
+        #endregion
+
+        #region Вспомогательные методы обработки ошибок
+
+        private static void LogError(string message)
+        {
+            try
+            {
+                string logEntry = $"{DateTime.Now}: {message}{Environment.NewLine}";
+                File.AppendAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "error.log"), logEntry, Encoding.UTF8);
+            }
+            catch
+            {
+                
+            }
+        }
+
+        private static bool IsBase64String(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s))
+                return false;
+            s = s.Trim();
+            
+            if (s.Length % 4 != 0)
+                return false;
+            try
+            {
+                Convert.FromBase64String(s);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private static void ResetFile()
+        {
+            try
+            {
+                File.Delete(filePath);
+            }
+            catch (Exception ex)
+            {
+                LogError("Не удалось сбросить файл событий: " + ex.Message);
+            }
         }
 
         #endregion

@@ -1,49 +1,79 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using CalendarLibrary;
-using Microsoft.Toolkit.Uwp.Notifications; 
-using MessageBox = System.Windows.MessageBox;
 
 namespace CalendarWPF
 {
     public partial class MainWindow : Window
     {
         private CalendarManager calendar;
+        private EncryptionSettings encryptionSettings;
+        private System.Windows.Threading.DispatcherTimer notificationTimer;
+
         
-        private string appId = "CalendarWPF.App";
+        private string eventsFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "events.dat");
 
         public MainWindow()
         {
             InitializeComponent();
 
-            calendar = new CalendarManager();
-            calendar.EventTimeReached += Calendar_EventTimeReached;
+            
+            encryptionSettings = SettingsStorage.LoadSettings();
 
             
+            if (!encryptionSettings.EncryptionEnabled && string.IsNullOrEmpty(encryptionSettings.EncryptionPassword))
+            {
+                MessageBoxResult dr = MessageBox.Show("Вы хотите включить шифрование данных событий? Если да, настройте пароль.",
+                    "Настройка шифрования", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (dr == MessageBoxResult.Yes)
+                {
+                    var frm = new EncryptionSettingsWindow();
+                    if (frm.ShowDialog() == true)
+                    {
+                        encryptionSettings = SettingsStorage.LoadSettings();
+                    }
+                }
+            }
+
+            
+            calendar = new CalendarManager();
+            List<CalendarEvent> loadedEvents = DataStorage.LoadEvents(encryptionSettings.EncryptionEnabled, encryptionSettings.EncryptionPassword);
+            foreach (var ev in loadedEvents)
+            {
+                calendar.AddEvent(ev);
+            }
+
             cbDisplayFormat.Items.Add("Краткий формат");
             cbDisplayFormat.Items.Add("Подробный формат");
             cbDisplayFormat.SelectedIndex = 0;
 
+            
+            notificationTimer = new System.Windows.Threading.DispatcherTimer();
+            notificationTimer.Interval = TimeSpan.FromMinutes(1);
+            notificationTimer.Tick += NotificationTimer_Tick;
+            notificationTimer.Start();
+
             RefreshEventList();
         }
 
-        
-        private void Calendar_EventTimeReached(CalendarEvent ev)
+        private void NotificationTimer_Tick(object sender, EventArgs e)
         {
-            
-            Dispatcher.Invoke(() => ShowToastNotification(ev));
-        }
-
-        
-        private void ShowToastNotification(CalendarEvent ev)
-        {
-            new ToastContentBuilder()
-                .AddText("Событие наступило!")
-                .AddText(ev.Title)
-                .Show();
+            DateTime now = DateTime.Now;
+            DateTime nextCheck = now.Add(notificationTimer.Interval);
+            foreach (var ev in calendar.GetEvents())
+            {
+                if (!ev.Notified && ev.Date >= now && ev.Date <= nextCheck)
+                {
+                    ev.Notified = true;
+                    
+                    MessageBox.Show($"Событие \"{ev.Title}\" наступило!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
         }
 
         private void btnAddEvent_Click(object sender, RoutedEventArgs e)
@@ -58,17 +88,18 @@ namespace CalendarWPF
 
         private void btnRemoveEvent_Click(object sender, RoutedEventArgs e)
         {
-            if (lbEvents.SelectedItem is CalendarEvent ev)
+            if (lbEvents.SelectedItem is CalendarEvent selectedEvent)
             {
-                calendar.RemoveEvent(ev);
+                calendar.RemoveEvent(selectedEvent);
                 RefreshEventList();
             }
             else
             {
-                MessageBox.Show("Выберите событие для удаления.");
+                MessageBox.Show("Выберите событие для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
+        
         private void lbEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (lbEvents.SelectedItem is CalendarEvent ev)
@@ -77,8 +108,12 @@ namespace CalendarWPF
                 editor.SetEvent(ev);
                 if (editor.ShowDialog() == true)
                 {
-                    
-                    calendar.EditEvent(ev, editor.CalendarEvent);
+                    ev.Date = editor.CalendarEvent.Date;
+                    ev.Title = editor.CalendarEvent.Title;
+                    ev.Description = editor.CalendarEvent.Description;
+                    ev.Geolocation = editor.CalendarEvent.Geolocation;
+                    ev.Attachments = editor.CalendarEvent.Attachments;
+                    ev.Notified = false;
                     RefreshEventList();
                 }
             }
@@ -92,32 +127,12 @@ namespace CalendarWPF
         
         private string FormatEvent(CalendarEvent ev)
         {
-            if (cbDisplayFormat.SelectedIndex == 1)
-                return ev.ToDetailedString();
-            else
-                return ev.ToString();
+            return cbDisplayFormat.SelectedIndex == 1 ? ev.ToDetailedString() : ev.ToString();
         }
 
         private void RefreshEventList()
         {
-            lbEvents.ItemsSource = null;
             lbEvents.ItemsSource = calendar.GetEvents().ToList();
-        }
-
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            
-            
-            e.Cancel = true;
-            this.Hide();
-
-            
-            new ToastContentBuilder()
-                .AddText("Приложение свернуто")
-                .AddText("Приложение продолжает работать в фоновом режиме")
-                .Show();
-
-            base.OnClosing(e);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CalendarWinForms
         public EncryptionSettingsForm()
         {
             InitializeComponent();
-            // Загружаем текущие настройки
+            
             var settings = SettingsStorage.LoadSettings();
             chkEnableEncryption.Checked = settings.EncryptionEnabled;
             tbNewPassword.Text = "";
@@ -55,6 +55,11 @@ namespace CalendarWinForms
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void EncryptionSettingsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

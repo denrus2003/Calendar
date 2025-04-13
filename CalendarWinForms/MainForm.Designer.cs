@@ -55,7 +55,7 @@
             this.tableLayoutPanelMain.Controls.Add(this.panelBottom, 0, 1);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(6);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 2;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
@@ -69,10 +69,11 @@
             this.lbEvents.FormattingEnabled = true;
             this.lbEvents.ItemHeight = 31;
             this.lbEvents.Location = new System.Drawing.Point(6, 6);
-            this.lbEvents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.lbEvents.Margin = new System.Windows.Forms.Padding(6);
             this.lbEvents.Name = "lbEvents";
             this.lbEvents.Size = new System.Drawing.Size(1036, 392);
             this.lbEvents.TabIndex = 0;
+            this.lbEvents.SelectedIndexChanged += new System.EventHandler(this.lbEvents_SelectedIndexChanged_1);
             this.lbEvents.DoubleClick += new System.EventHandler(this.lbEvents_DoubleClick);
             // 
             // panelBottom
@@ -85,7 +86,7 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBottom.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.panelBottom.Location = new System.Drawing.Point(6, 410);
-            this.panelBottom.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelBottom.Margin = new System.Windows.Forms.Padding(6);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(1036, 90);
             this.panelBottom.TabIndex = 1;
@@ -139,7 +140,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 506);
             this.Controls.Add(this.tableLayoutPanelMain);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Календарь WinForms";

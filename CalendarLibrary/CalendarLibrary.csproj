@@ -48,6 +48,7 @@
     <Compile Include="DataStorage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EncryptionSettings.cs" />
+    <Compile Include="SecurityQuestionsStorage.cs" />
     <Compile Include="SettingsStorage.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -43,9 +43,10 @@
             // chkEnableEncryption
             // 
             this.chkEnableEncryption.AutoSize = true;
-            this.chkEnableEncryption.Location = new System.Drawing.Point(12, 12);
+            this.chkEnableEncryption.Location = new System.Drawing.Point(24, 23);
+            this.chkEnableEncryption.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.chkEnableEncryption.Name = "chkEnableEncryption";
-            this.chkEnableEncryption.Size = new System.Drawing.Size(200, 21);
+            this.chkEnableEncryption.Size = new System.Drawing.Size(465, 36);
             this.chkEnableEncryption.TabIndex = 0;
             this.chkEnableEncryption.Text = "Включить шифрование данных";
             this.chkEnableEncryption.UseVisualStyleBackColor = true;
@@ -53,42 +54,47 @@
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Location = new System.Drawing.Point(12, 45);
+            this.lblPassword.Location = new System.Drawing.Point(24, 87);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(64, 17);
+            this.lblPassword.Size = new System.Drawing.Size(121, 32);
             this.lblPassword.TabIndex = 1;
             this.lblPassword.Text = "Пароль:";
             // 
             // tbNewPassword
             // 
-            this.tbNewPassword.Location = new System.Drawing.Point(120, 42);
+            this.tbNewPassword.Location = new System.Drawing.Point(240, 81);
+            this.tbNewPassword.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbNewPassword.Name = "tbNewPassword";
-            this.tbNewPassword.Size = new System.Drawing.Size(200, 22);
+            this.tbNewPassword.Size = new System.Drawing.Size(396, 38);
             this.tbNewPassword.TabIndex = 2;
             this.tbNewPassword.UseSystemPasswordChar = true;
             // 
             // lblConfirmPassword
             // 
             this.lblConfirmPassword.AutoSize = true;
-            this.lblConfirmPassword.Location = new System.Drawing.Point(12, 75);
+            this.lblConfirmPassword.Location = new System.Drawing.Point(24, 145);
+            this.lblConfirmPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblConfirmPassword.Name = "lblConfirmPassword";
-            this.lblConfirmPassword.Size = new System.Drawing.Size(150, 17);
+            this.lblConfirmPassword.Size = new System.Drawing.Size(297, 32);
             this.lblConfirmPassword.TabIndex = 3;
             this.lblConfirmPassword.Text = "Подтвердите пароль:";
             // 
             // tbConfirmPassword
             // 
-            this.tbConfirmPassword.Location = new System.Drawing.Point(170, 72);
+            this.tbConfirmPassword.Location = new System.Drawing.Point(340, 140);
+            this.tbConfirmPassword.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.tbConfirmPassword.Name = "tbConfirmPassword";
-            this.tbConfirmPassword.Size = new System.Drawing.Size(150, 22);
+            this.tbConfirmPassword.Size = new System.Drawing.Size(296, 38);
             this.tbConfirmPassword.TabIndex = 4;
             this.tbConfirmPassword.UseSystemPasswordChar = true;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(120, 110);
+            this.btnSave.Location = new System.Drawing.Point(240, 213);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(90, 30);
+            this.btnSave.Size = new System.Drawing.Size(180, 58);
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -96,9 +102,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(230, 110);
+            this.btnCancel.Location = new System.Drawing.Point(460, 213);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 30);
+            this.btnCancel.Size = new System.Drawing.Size(180, 58);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -106,9 +113,9 @@
             // 
             // EncryptionSettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(340, 160);
+            this.ClientSize = new System.Drawing.Size(680, 310);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.tbConfirmPassword);
@@ -116,11 +123,14 @@
             this.Controls.Add(this.tbNewPassword);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.chkEnableEncryption);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "EncryptionSettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Настройки шифрования";
+            this.Load += new System.EventHandler(this.EncryptionSettingsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion

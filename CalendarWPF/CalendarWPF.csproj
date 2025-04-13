@@ -59,6 +59,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ResetPasswordWindow.xaml.cs">
+      <DependentUpon>ResetPasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="EncryptionSettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="EventEditorWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -70,6 +77,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EncryptionSettingsWindow.xaml.cs">
+      <DependentUpon>EncryptionSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EventEditorWindow.xaml.cs">
       <DependentUpon>EventEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -77,8 +87,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PasswordEntryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResetPasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PasswordEntryWindow.xaml.cs">
+      <DependentUpon>PasswordEntryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
