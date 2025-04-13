@@ -21,7 +21,7 @@ namespace CalendarLibrary
         {
             if (!File.Exists(questionsFilePath))
             {
-                // Если файл отсутствует, создаем список с дефолтными вопросами.
+                
                 var defaultQuestions = new List<SecurityQuestion>
                 {
                     new SecurityQuestion { Question = "Как зовут вашего питомца?", Answer = "Fluffy" },
